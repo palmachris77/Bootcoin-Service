@@ -92,7 +92,7 @@ public class MovementController {
 				)
 				.defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
-	
+	//Publica la ofertas que tienen el Estado de la transaccion en P (Compras)
 	@PostMapping("/publish-offer")
 	public Mono<ResponseEntity<Movement>> publishOffer(@RequestBody Movement body, final ServerHttpRequest rq){
 		return service.publishOffer(body)
@@ -101,7 +101,7 @@ public class MovementController {
 						.body(bcm)
 							);
 	}
-	
+	//Lista los ofertas que tienen el Estado de la transaccion en Purchase  (compras)
 	@GetMapping("/offers")
 	public Mono<ResponseEntity<Flux<Movement>>> findAllOffers(){
 		Flux<Movement> fluxBCMovement = service.findAllOffers();
@@ -110,7 +110,7 @@ public class MovementController {
 							.contentType(MediaType.APPLICATION_JSON)
 							.body(fluxBCMovement));
 	}
-	
+   //Realiza la venta 
 	@PutMapping("/sell/{id}")
 	public Mono<ResponseEntity<Movement>> sell(@PathVariable("id") UUID id, @RequestBody MovementDTO body){
 		return service.sell(id, body)
